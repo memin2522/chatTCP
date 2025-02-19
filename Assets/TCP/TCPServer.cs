@@ -12,10 +12,6 @@ public class TCPServer : MonoBehaviour
 
     public bool isServerRunning;
 
-    private void Start()
-    {
-    }
-
     public void StartServer(int port)
     {
         tcpListener = new TcpListener(IPAddress.Any, port); // Configures the TCP server to listen on any IP and the specified port

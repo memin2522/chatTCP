@@ -1,11 +1,12 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class ServerUI : MonoBehaviour
 {
     public int serverPort = 5555;
     [SerializeField] private TCPServer _server;
-    [SerializeField] private InputField messageInput;
+    [SerializeField] private TMP_InputField messageInput;
     public void SendServerMessage()
     {
         if(!_server.isServerRunning){
@@ -18,8 +19,8 @@ public class ServerUI : MonoBehaviour
             return;
         }
 
-        string mensaje = messageInput.text; // Get the text from the message entry
-        _server.SendData(mensaje); // Send message to the client
+        string message = messageInput.text; // Get the text from the message entry
+        _server.SendData(message); // Send message to the client
     }
 
     public void StartServer()
