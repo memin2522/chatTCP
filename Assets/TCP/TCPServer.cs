@@ -2,7 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets; 
 using UnityEngine;
-using UnityEngine.UI; 
+
 public class TCPServer : MonoBehaviour
 {
     private TcpListener tcpListener; // TCP server declaration
@@ -25,7 +25,7 @@ public class TCPServer : MonoBehaviour
     {
         connectedClient = tcpListener.EndAcceptTcpClient(result); // Completes client acceptance and establishes the connection
         networkStream = connectedClient.GetStream(); // Retrieves the network data stream from the connected client
-        Debug.Log("Client connected: " + connectedClient); // Displays a message in the console indicating that a client has connected
+        Debug.Log("Client connected: " + connectedClient.Client.RemoteEndPoint); // Displays a message in the console indicating that a client has connected
         receiveBuffer = new byte[connectedClient.ReceiveBufferSize]; // Initializes the reception buffer with the client's buffer size
         networkStream.BeginRead(receiveBuffer, 0, receiveBuffer.Length, ReceiveData, null); // Begins asynchronously reading data from the network stream
         tcpListener.BeginAcceptTcpClient(HandleIncomingConnection, null); // Continues waiting for new client connections asynchronously
