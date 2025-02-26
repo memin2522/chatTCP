@@ -2,10 +2,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ServerUI : MonoBehaviour
+public class UdpServerUI : MonoBehaviour
 {
     public int serverPort = 5555;
-    [SerializeField] private TCPServer _server;
+    [SerializeField] private UDPServer _server;
     [SerializeField] private TMP_InputField messageInput;
     public void SendServerMessage()
     {
@@ -25,6 +25,6 @@ public class ServerUI : MonoBehaviour
 
     public void StartServer()
     {
-        _server.StartServer(serverPort);
+        _server.StartUDPServer(serverPort);
     }
 }
