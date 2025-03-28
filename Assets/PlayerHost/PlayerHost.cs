@@ -38,20 +38,26 @@ public class PlayerHost : MonoBehaviour
 
    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SendPosition();
-        }
+        
         while (mainThreadActions.TryDequeue(out Action action))
         {
             action?.Invoke();
         }
-        // Procesa las posiciones recibidas en el hilo principal
-        while (positionQueue.TryDequeue(out Vector3 newPosition))
+        if (protocolUDP.isServer)
         {
-            if (multiplayerTransform != null)
-                multiplayerTransform.position = newPosition;
+            while (positionQueue.TryDequeue(out Vector3 newPosition))
+            {
+                if (multiplayerTransform != null)
+                    multiplayerTransform.position = newPosition;
+            }
+        }else
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SendPosition();
+            }
         }
+        
    }
         
     
